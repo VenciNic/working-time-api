@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
-class CompaniesController extends AppController
+class EmployeesController extends AppController
 {
     public function initialize() {
         parent::initialize();
@@ -13,39 +13,39 @@ class CompaniesController extends AppController
     }
 
     public function index() {
-        $this->set('companies', $this->paginate());
-        $this->set('_serialize', 'companies');
+        $this->set('employees', $this->paginate());
+        $this->set('_serialize', 'employees');
     }
 
     public function view($id) {      
-        $company = $this->Companies->findById($id)->firstOrFail();
+        $employee = $this->Employees->findById($id)->firstOrFail();
         $this->set([
-            'company' => $company,
-            '_serialize' => ['company']
+            'employee' => $employee,
+            '_serialize' => ['employee']
         ]);
     }
 
     public function add() {
-        $company = $this->Companies->newEntity($this->request->getData());
-        if ($this->Companies->save($company)) {
+        $employee = $this->Employees->newEntity($this->request->getData());
+        if ($this->Employees->save($employee)) {
             $message = 'Saved';
         } else {
             $message = 'Error';
         }
         $this->set([
             'message' => $message,
-            'company' => $company,
-            '_serialize' => ['message', 'company']
+            'employee' => $employee,
+            '_serialize' => ['message', 'employee']
         ]);
     }
     
     public function edit($id)
     {
-        $company = $this->Companies->get($id);
+        $employee = $this->Employees->get($id);
 
         if ($this->request->is(['post', 'put'])) {
-            $company = $this->Companies->patchEntity($company, $this->request->getData());
-            if ($this->Companies->save($company)) {
+            $employee = $this->Employees->patchEntity($employee, $this->request->getData());
+            if ($this->Employees->save($employee)) {
                 $message = 'Saved';
             } else {
                 $message = 'Error';
@@ -59,9 +59,9 @@ class CompaniesController extends AppController
     
     public function delete($id)
     {
-        $company = $this->Companies->get($id);
+        $employee = $this->Employees->get($id);
         $message = 'Deleted';
-        if (!$this->Companies->delete($company)) {
+        if (!$this->Employees->delete($employee)) {
             $message = 'Error';
         }
         $this->set([
