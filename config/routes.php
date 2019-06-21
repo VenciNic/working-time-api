@@ -93,7 +93,9 @@ Router::scope('/', function (RouteBuilder $routes) {
 
 Router::scope('/', function ($routes) {
     $routes->setExtensions(['json']);
-    $routes->resources('Companies');
+    $routes->resources('Companies', function ($routes) {
+        $routes->resources('Projects');
+    });
 });
 
 /**
