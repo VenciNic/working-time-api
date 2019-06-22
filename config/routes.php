@@ -95,6 +95,7 @@ Router::scope('/', function ($routes) {
     $routes->setExtensions(['json']);
     $routes->resources('Companies', function ($routes) {
         $routes->resources('Projects');
+        $routes->resources('Employees');
     });
 });
 
