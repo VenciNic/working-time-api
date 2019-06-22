@@ -22,6 +22,10 @@ class CreateEmployeesWorkingTimes extends AbstractMigration
             'default' => null,
             'null' => false,
         ]);
+        $table->addColumn('working_overtime', 'time', [
+            'default' => null,
+            'null' => true,
+        ]);
         $table->addColumn('created', 'datetime', [
             'default' => null,
             'null' => false,
