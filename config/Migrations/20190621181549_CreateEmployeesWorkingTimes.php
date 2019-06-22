@@ -31,7 +31,7 @@ class CreateEmployeesWorkingTimes extends AbstractMigration
             'null' => false,
         ]);
         $table->addIndex(['employee_id'])
-              ->addForeignKey('employee_id', 'employees', 'id');
+              ->addForeignKey('employee_id', 'employees_projects', 'id');
         $table->create();
     }
 }
