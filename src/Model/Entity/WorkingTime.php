@@ -4,7 +4,7 @@ namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
 
-class EmployeesWorkingTime extends Entity
+class WorkingTime extends Entity
 {
     protected $_accessible = [
         '*' => true,

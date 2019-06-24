@@ -1,7 +1,7 @@
 <?php
 use Migrations\AbstractMigration;
 
-class CreateEmployeesWorkingTimes extends AbstractMigration
+class CreateWorkingTimes extends AbstractMigration
 {
     /**
      * Change Method.
@@ -12,8 +12,8 @@ class CreateEmployeesWorkingTimes extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('employees_working_times');
-        $table->addColumn('employee_id', 'integer', [
+        $table = $this->table('working_times');
+        $table->addColumn('employee_project_id', 'integer', [
             'default' => null,
             'limit' => 11,
             'null' => false,
@@ -34,8 +34,7 @@ class CreateEmployeesWorkingTimes extends AbstractMigration
             'default' => null,
             'null' => false,
         ]);
-        $table->addIndex(['employee_id'])
-              ->addForeignKey('employee_id', 'employees_projects', 'id');
+        $table->addForeignKey('employee_project_id', 'employees_projects', 'id');
         $table->create();
     }
 }
