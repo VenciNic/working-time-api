@@ -3,6 +3,7 @@
 namespace App\Model\Table;
 
 use Cake\ORM\Table;
+use Cake\ORM\Query;
 
 class EmployeesProjectsTable extends Table
 {
@@ -11,5 +12,10 @@ class EmployeesProjectsTable extends Table
         $this->addBehavior('Timestamp');
         $this->belongsToMany('Employees');
         $this->belongsToMany('Projects');
+    }
+             
+    public function findEmployeesProjects(Query $query, array $options) 
+    {
+        return $query->where($options);
     }
 }
