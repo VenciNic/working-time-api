@@ -28,6 +28,9 @@ class CreateEmployeesProjects extends AbstractMigration
             'limit' => 11,
             'null' => false,
         ]);
+        
+        $table->addIndex(['company_id','employee_id', 'project_id'], ['unique' => true]);
+        
         $table->addPrimaryKey(['company_id','employee_id', 'project_id']);
         
         $table->addForeignKey('company_id', 'companies', 'id');
