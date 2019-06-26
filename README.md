@@ -85,7 +85,7 @@ To assign a project to employee, you should send POST request as well to http://
 		"employee_id":"EMPLOYEE_ID"
     }
 
-The registratin of working hours is POST request to http://localhost:8765/working-times/add 
+The registration of working hours is POST request to http://localhost:8765/working-times/add 
 and json body:
 
     {
