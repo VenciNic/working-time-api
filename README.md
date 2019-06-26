@@ -100,7 +100,7 @@ and json body:
 
 To check the working hours visit http://localhost:8765/working-times for all records.
 
-You can filter the working time by companies. employees and projects like that:
+You can filter the working time by companies, employees and projects like that:
 
 http://localhost:8765/employees-projects/view?company_id=COMPANY_ID&employee_id=EMPLOYEE_ID&project_id=PROJECT_ID
 
