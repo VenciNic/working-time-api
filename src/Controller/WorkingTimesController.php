@@ -29,10 +29,9 @@ class WorkingTimesController extends AppController
 
     public function add() 
     {
-
         $employeesProjects = $this->WorkingTimes->EmployeesProjects
-                ->find('employeesProjects', $this->request->getData('employees_projects'))
-                ->first();
+            ->find('employeesProjects', $this->request->getData('employees_projects'))
+            ->first();
 
         $interval = $this->WorkingTimes->getWorkingTimeInterval([
             'company_id' => $this->request->getData('company_id'),

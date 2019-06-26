@@ -3,6 +3,7 @@
 namespace App\Model\Table;
 
 use Cake\ORM\Table;
+use Cake\ORM\Query;
 use Cake\ORM\TableRegistry;
 use Cake\I18n\Time;
 
@@ -12,6 +13,11 @@ class WorkingTimesTable extends Table
     {
         $this->addBehavior('Timestamp');
         $this->belongsTo('EmployeesProjects');
+    }
+    
+    public function findWorkingTimes(Query $query, array $options) 
+    {
+        return $query->where($options);
     }
     
     public function getWorkingTimeInterval($data = array())

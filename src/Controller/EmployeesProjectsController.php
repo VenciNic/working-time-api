@@ -19,11 +19,22 @@ class EmployeesProjectsController extends AppController
         $this->set('_serialize', 'employees_projects');
     }
 
-    public function view($id = null)
+    public function view()
     {
-        $employeesProject = $this->EmployeesProjects->findById($id)->firstOrFail();
+        $queryParams = $this->request->getQuery();
+        $query = $this->EmployeesProjects->find('employeesProjects', $queryParams)
+            ->select('id')
+            ->all();
+        foreach($query as $employeeProject){
+            $employeeProjectIds[] = $employeeProject->id;
+        }
+        
+        $employeesProjects = $this->EmployeesProjects->WorkingTimes
+            ->find('workingTimes', ['employee_project_id IN' => $employeeProjectIds])
+            ->all();
+        
         $this->set([
-            'employees_projects' => $employeesProject,
+            'employees_projects' => $employeesProjects,
             '_serialize' => ['employees_projects']
         ]);
     }

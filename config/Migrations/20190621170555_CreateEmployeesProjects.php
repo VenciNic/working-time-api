@@ -13,6 +13,11 @@ class CreateEmployeesProjects extends AbstractMigration
     public function change()
     {
         $table = $this->table('employees_projects');
+        $table->addColumn('company_id', 'integer', [
+            'default' => null,
+            'limit' => 11,
+            'null' => false,
+        ]);
         $table->addColumn('employee_id', 'integer', [
             'default' => null,
             'limit' => 11,
@@ -23,7 +28,9 @@ class CreateEmployeesProjects extends AbstractMigration
             'limit' => 11,
             'null' => false,
         ]);
-        $table->addPrimaryKey(['employee_id', 'project_id']);
+        $table->addPrimaryKey(['company_id','employee_id', 'project_id']);
+        
+        $table->addForeignKey('company_id', 'companies', 'id');
         
         $table->addForeignKey('employee_id', 'employees', 'id');
         
