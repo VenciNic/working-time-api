@@ -33,19 +33,78 @@ bin/cake server -p 8765
 
 Then visit `http://localhost:8765` to see the welcome page.
 
-## Update
+## Requirement
+```bash
+composer require fzaninotto/faker
+```
+Documentation of the plugin can be fount on [Faker](https://github.com/fzaninotto/Faker).
 
-Since this skeleton is a starting point for your application and various files
-would have been modified as per your needs, there isn't a way to provide
-automated upgrades, so you have to do any updates manually.
 
 ## Configuration
 
-Read and edit `config/app.php` and setup the `'Datasources'` and any other
-configuration relevant for your application.
+Read and edit `config/app.php` and setup the `'Datasources'`.
+Run the folllowing migrations command to craete you database tables with relations:
 
-## Layout
+```bash
+bin/cake migrations migrate
+```
 
-The app skeleton uses a subset of [Foundation](http://foundation.zurb.com/) (v5) CSS
-framework by default. You can, however, replace it with any other library or
-custom styles.
+To seed your database with test data, just run the command:
+
+```bash 
+php vendor/bin/phinx seed:run
+```
+## Usage
+
+To create create a company you should send a POST request to http://localhost:8765/companies/add with json body in the following format:
+
+    {
+        "name": "COMPANY_NAME",
+        "working_time": "H:i:s"
+    }
+
+To creation of an employee is in the same way http://localhost:8765/employees/add  
+
+    {
+        "company_id": "COMPANY_ID",
+        "name": "EMPLOYEE_NAME"
+    }
+
+and for project http://localhost:8765/projects/add  
+
+    {
+        "company_id": "COMPANY_ID",
+        "title": "PROJECT_TITLE"
+    }
+
+To assign a project to employee, you should send POST request as well to http://localhost:8765/employees-projects/add with valid company, project and employee.
+
+    {
+        "company_id": "COMPANY_ID",
+		"project_id":"PROJECT_ID",
+		"employee_id":"EMPLOYEE_ID"
+    }
+
+The registratin of working hours is POST request to http://localhost:8765/working-times/add 
+and json body:
+
+    {
+		"company_id": "COMPANY_ID",
+	    	"employees_projects":{
+			"project_id":"PROJECT_ID",
+			"employee_id":"EMPLOYEE_ID"
+	    	},
+
+		"working_time":"H:i:s"
+    }
+
+To check the working hours visit http://localhost:8765/working-times for all records.
+
+You can filter the working time by companies. employees and projects like that:
+
+http://localhost:8765/employees-projects/view?company_id=COMPANY_ID&employee_id=EMPLOYEE_ID&project_id=PROJECT_ID
+
+or one by one:
+
+http://localhost:8765/employees-projects/view?employee_id=EMPLOYEE_ID
+    
